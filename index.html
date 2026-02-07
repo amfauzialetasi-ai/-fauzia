@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For My Fauzia</title>
+    <style>
+        body {
+            background-color: #ffdae0;
+            margin: 0;
+            overflow: hidden;
+            font-family: 'Georgia', serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        #overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: #ffb3c1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 100;
+            cursor: pointer;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            transition: 1s;
+        }
+
+        .heart {
+            position: absolute;
+            color: #ff4d6d;
+            font-size: 50px; /* Extra Large */
+            animation: float 6s linear infinite;
+            opacity: 0;
+            pointer-events: none;
+            text-shadow: 0 0 15px rgba(255, 77, 109, 0.5);
+        }
+
+        @keyframes float {
+            0% { transform: translateY(110vh) rotate(0deg) scale(1); opacity: 0.8; }
+            100% { transform: translateY(-20vh) rotate(360deg) scale(1.3); opacity: 0; }
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.96);
+            padding: 30px;
+            border-radius: 25px;
+            box-shadow: 0 15px 50px rgba(0,0,0,0.15);
+            text-align: center;
+            max-width: 450px;
+            max-height: 85vh;
+            overflow-y: auto;
+            z-index: 10;
+            border: 3px solid #ffb3c1;
+            opacity: 0;
+            transition: opacity 2s ease-in;
+        }
+
+        .profile-img {
+            width: 170px;
+            height: 170px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 5px solid #ff4d6d;
+            margin-bottom: 20px;
+        }
+
+        h1 { color: #ff4d6d; font-size: 28px; margin-bottom: 5px; }
+
+        .main-msg {
+            color: #ff4d6d;
+            font-weight: bold;
+            font-size: 19px;
+            margin-bottom: 20px;
+            padding: 12px;
+            border-bottom: 2px solid #ffdae0;
+        }
+
+        .letter-content {
+            color: #333;
+            line-height: 1.8;
+            font-size: 16px;
+            text-align: left;
+            white-space: pre-line;
+            background: #fff;
+            padding: 25px;
+            border-radius: 20px;
+        }
+
+        .replay-btn {
+            background: #ff4d6d;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 20px;
+            cursor: pointer;
+            margin-top: 15px;
+            font-family: 'Georgia', serif;
+            transition: 0.3s;
+        }
+
+        .replay-btn:hover { background: #ff758c; }
+
+        .footer-hearts { font-size: 24px; margin-top: 25px; color: #ff4d6d; font-weight: bold; }
+    </style>
+</head>
+<body>
+
+    <div id="overlay" onclick="startValentine()">
+        <div>
+            <h1>For Fauzia ❤️</h1>
+            <p>Click to hear something special</p>
+        </div>
+    </div>
+
+    <audio id="bgMusic">
+        <source src="https://www.myinstants.com/media/sounds/lana-del-rey-cinnamon-girl-official-audio.mp3" type="audio/mpeg">
+    </audio>
+
+    <div class="card" id="valentineCard">
+        <img src="1000072246.png" alt="Fauzia" class="profile-img">
+        
+        <h1>To My Special Person 🫶</h1>
+        
+        <div class="main-msg">
+            I love you so much Fauzia. I am happy that you are happy with your gifts love. 
+            I will always cherish and love you my dear Fauzia.
+        </div>
+
+        <div class="letter-content">
+            You are truly special ✨ and when I say special, I mean it in the deepest, most heartfelt way ❤️. With you, I find a comfort I've never known 🤍. Talking to you feels easy, sharing my thoughts feels safe 🕊️. You listen without judgment, without limits 🌙. Around you, I don't fear being misunderstood — I can simply be myself 🌸. 
+
+            It took time for me to realize that you're not like the others 💫. You care in ways words can't capture 🌹. You love me for who I am — no filters, no expectations 💕. You have a heart so rare, so kind, it still amazes me ✨. You're the one who stays up just to hear my silly talks 😁💛, the one who sees through my smile and asks, "Are you really okay?" 🥺❤️ You notice the pain even when I hide it well 🌨️💔.
+
+            I can never thank you enough for walking into my life and lighting it up with your love and patience 🌟🤍. You've always said "I'll be there for you," and you've kept that promise every single time 🤞❤️. You corrected me when I was wrong, stood by me when I was weak 🤝💗, and reminded me that I am loved and important 💞. 
+
+            In a world full of people, you are my one person 🌍❤️, the only one I truly need. Stay with me forever, because life without you wouldn't be the same 🫶✨. I love you endlessly 💖♾️.
+        </div>
+        
+        <button class="replay-btn" onclick="restartMusic()">♫ Replay Cinnamon Girl</button>
+        <div class="footer-hearts">I love you so much 💗 💓</div>
+    </div>
+
+    <script>
+        const audio = document.getElementById('bgMusic');
+
+        function startValentine() {
+            document.getElementById('overlay').style.opacity = '0';
+            setTimeout(() => {
+                document.getElementById('overlay').style.display = 'none';
+                document.getElementById('valentineCard').style.opacity = '1';
+            }, 1000);
+            audio.play();
+            setInterval(createHeart, 400);
+        }
+
+        function restartMusic() {
+            audio.currentTime = 0;
+            audio.play();
+        }
+
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.classList.add('heart');
+            const icons = ['❤️', '💖', '💗', '💓', '💕'];
+            heart.innerHTML = icons[Math.floor(Math.random() * icons.length)];
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.fontSize = (Math.random() * 20 + 40) + 'px';
+            heart.style.animationDuration = (Math.random() * 3 + 4) + 's';
+            document.body.appendChild(heart);
+            setTimeout(() => { heart.remove(); }, 6000);
+        }
+    </script>
+</body>
+</html>
